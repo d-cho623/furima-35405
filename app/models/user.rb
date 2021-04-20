@@ -5,12 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :nickname, presence: true
-  validates :email, presence: true
 
-  with_options presence: true, format: {with: /(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{7,}/} do
-    validates :encrypted_password
+  with_options format: {with: /(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{7,}/} do
     validates :password
-    validates :password_confirmation
   end
   
   with_options presence: true, format: {with: /\A[ぁ-んァ-ン一-龥]/, message: "全角のみで入力してください"} do
