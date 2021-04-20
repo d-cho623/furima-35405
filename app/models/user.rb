@@ -6,11 +6,11 @@ class User < ApplicationRecord
 
   validates :nickname, presence: true
 
-  with_options format: {with: /(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{7,}/} do
+  with_options format: {with: /(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,}/} do
     validates :password
   end
   
-  with_options presence: true, format: {with: /\A[ぁ-んァ-ン一-龥]/, message: "全角のみで入力してください"} do
+  with_options presence: true, format: {with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: "全角のみで入力してください"} do
     validates :last_name
     validates :first_name
   end
