@@ -65,6 +65,12 @@ RSpec.describe User, type: :model do
           expect(another_user.errors.full_messages).to include('Email has already been taken')
         end
 
+        it "emailに@がない場合は登録できない" do
+          @user.email = "testtesttest"
+          @user.valid?
+          expect(@user.errors.full_messages).to include("Email is invalid")
+        end
+
         it "passwordが空では登録できない" do
           @user.password = ""
           @user.valid?
@@ -84,11 +90,24 @@ RSpec.describe User, type: :model do
           expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
         end
 
-        it "passwordが英数字混合でなければ登録できない" do
+        it "passwordが数字のみでは登録できない" do
           @user.password = "000000"
           @user.password_confirmation = "000000"
           @user.valid?
           expect(@user.errors.full_messages).to include("Password is invalid")
+        end
+
+        it "passwordが英字のみでは登録できない" do
+          @user.password = "aaaaaa"
+          @user.password_confirmation = "aaaaaa"
+          @user.valid?
+          expect(@user.errors.full_messages).to include("Password is invalid")
+        end
+
+        it "passwordが全角では登録できない" do
+          @user.password = "ｂｃｄｂｃｄ１２"
+          @user.password_confirmation = "ｂｃｄｂｃｄ１２"
+          expect(@user.errors.full_messages).to include()
         end
 
         it "last_nameが空では登録できない" do
@@ -106,13 +125,13 @@ RSpec.describe User, type: :model do
         it "last_nameが全角(漢字、ひらがな、カタカナ)でなければ登録できない" do
           @user.last_name = "あああa"
           @user.valid?
-          expect(@user.errors.full_messages).to include("Last name 全角のみで入力してください")
+          expect(@user.errors.full_messages).to include("Last name 全角(漢字、ひらがな、カタカナ)のみで入力してください")
         end
 
         it "first_nameが全角(漢字、ひらがな、カタカナ)でなければ登録できない" do
           @user.first_name = "あああaaa"
           @user.valid?
-          expect(@user.errors.full_messages).to include("First name 全角のみで入力してください")
+          expect(@user.errors.full_messages).to include("First name 全角(漢字、ひらがな、カタカナ)のみで入力してください")
         end
 
         it "last_name_kanaが全角カタカナでなければ登録できない" do
