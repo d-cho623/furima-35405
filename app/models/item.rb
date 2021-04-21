@@ -11,14 +11,20 @@ class Item < ApplicationRecord
   has_one_attached :image
   # has_one :buy_info
 
-  validates :name, presence: true
-  validates :info, presence: true
-  validates :category_id, numericality: { other_than: 1 } 
-  validates :sales_status_id, numericality: { other_than: 1 } 
-  validates :shipping_fee_status_id, numericality: { other_than: 1 } 
-  validates :prefecture_id, numericality: { other_than: 1 } 
-  validates :scheduled_delivery_id, numericality: { other_than: 1 } 
-  validates :price, presence: true, numericality: { only_integer: true, greater_than: 300, less_than: 9999999 }
-  validates :image, presence: true
+  with_options presence: true do
+    validates :name
+    validates :info
+    validates :image
+  end
 
+  with_options numericality: { other_than: 1 } do 
+    validates :category_id
+    validates :sales_status_id
+    validates :shipping_fee_status_id
+    validates :prefecture_id
+    validates :scheduled_delivery_id
+  end
+
+  validates :price, presence: true, numericality: { only_integer: true, greater_than: 299, less_than: 10000000 }
+  
 end
