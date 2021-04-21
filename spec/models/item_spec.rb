@@ -73,13 +73,19 @@ RSpec.describe Item, type: :model do
         it "priceが300未満では登録できない" do
           @item.price = 299
           @item.valid?
-          expect(@item.errors.full_messages).to include("Price must be greater than 300")
+          expect(@item.errors.full_messages).to include("Price must be greater than 299")
         end
 
         it "priceが9999999より大きいと登録できない" do
           @item.price = 10000000
           @item.valid?
-          expect(@item.errors.full_messages).to include("Price must be less than 9999999")
+          expect(@item.errors.full_messages).to include("Price must be less than 10000000")
+        end
+
+        it "商品に紐づくユーザーがない場合、登録できない" do
+          @item.user = nil
+          @item.valid?
+          expect(@item.errors.full_messages).to include("User must exist")
         end
       end
     end
