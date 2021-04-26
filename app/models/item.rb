@@ -7,13 +7,13 @@ class Item < ApplicationRecord
   belongs_to :scheduled_delivery
 
   belongs_to :user
-  has_one_attached :image
+  has_many_attached :images
   has_one :order
 
   with_options presence: true do
     validates :name
     validates :info
-    validates :image
+    validates :images
   end
 
   with_options numericality: { other_than: 1 } do
