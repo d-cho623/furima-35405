@@ -13,10 +13,10 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :name
     validates :info
-    validates :images
+    validates :images, presence: {message: 'が添付されていません'}
   end
 
-  with_options numericality: { other_than: 1 } do
+  with_options numericality: { other_than: 1, message: 'が選択されていません' } do
     validates :category_id
     validates :sales_status_id
     validates :shipping_fee_status_id
