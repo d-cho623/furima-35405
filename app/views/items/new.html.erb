@@ -24,7 +24,7 @@
         </div>
       </div>
       <% @item.images.each do |image| %>
-        <%= image_tag image, class: 'images' %>
+        <%= image_tag image.variant(resize: '500x500'), class: 'images' %>
       <% end %>
     </div>
     <%# /出品画像 %>

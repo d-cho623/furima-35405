@@ -63,3 +63,11 @@
 
 ### Association
 - belongs_to: order
+
+
+## commentテーブル
+| Column   | Type           | Options                        |
+| ---------| -------------- | -----------------------------  |
+| text     | text           | null: false                    |
+| user     | references     | null: false, foreign_key: true |
+| item     | references     | null: false, foreign_key: true |
