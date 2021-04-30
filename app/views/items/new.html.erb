@@ -19,12 +19,14 @@
         <p>
           クリックしてファイルをアップロード
         </p>
-        <%= f.file_field :images, name: 'item[images][]', id:"item-image" %>
+        <div class = "image-element">
+        <%= f.file_field :images, name: 'item[images][]', id:"item-image", data: {id: 0} %>
+        </div>
         <div id = "image-list">
         </div>
       </div>
       <% @item.images.each do |image| %>
-        <%= image_tag image.variant(resize: '500x500'), class: 'images' %>
+        <%= image_tag image.variant(resize: "100x100").processed, class: 'images' %>
       <% end %>
     </div>
     <%# /出品画像 %>
