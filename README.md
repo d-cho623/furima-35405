@@ -16,7 +16,6 @@
 ### Association
 - has_many: items
 - has_many: orders
-- has_many: comments
 
 ## itemsテーブル
 
@@ -36,10 +35,6 @@
 ### Association
 - belongs_to: user
 - has_one: order
-- has_many: comments
-- has_many: tags
-- has_many: item_tags
-
 
 ## ordersテーブル
 | Column                  | Type        | Options                        |
@@ -76,30 +71,3 @@
 | text     | text           | null: false                    |
 | user     | references     | null: false, foreign_key: true |
 | item     | references     | null: false, foreign_key: true |
-
-
-### Association
-- belongs_to: user
-- belongs_to: item
-
-
-## tagテーブル
-| Column   | Type           | Options                        |
-| ---------| -------------- | -----------------------------  |
-| title    | string         | null: false                    |
-
-### Association
-- has_many: items
-- has_many: item_tag_relations
-
-
-## item_tag_relationテーブル
-| Column   | Type           | Options                        |
-| ---------| -------------- | -----------------------------  |
-| item     | references     | null: false, foreign_key: true |
-| tag      | references     | null: false, foreign_key: true |
-
-
-### Association
-- belongs_to: item
-- belongs_to: tag
