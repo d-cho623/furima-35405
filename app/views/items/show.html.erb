@@ -113,7 +113,7 @@
       
         <%# <span>コメントする<span> %>
     <% end %>
-    <div id='comments'>
+    <div id="comments">
       <% @comments.reverse_each do |comment| %>
         <p><%= comment.user.nickname%>: <%= comment.text %> </p>
       <% end %>
